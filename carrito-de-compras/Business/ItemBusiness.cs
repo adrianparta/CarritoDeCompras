@@ -13,12 +13,14 @@ namespace Business
 {
     public class ItemBusiness
     {
-        public static List<Item> List()
+        public static List<Item> List(string id = "")
         {
             List<Item> itemList = new List<Item>();
             AccessData data = new AccessData();
             try
             {
+                string aux = "";
+                if (id != "") aux += " where a.Id = " + id;
                 data.SetQuery(@"SELECT 
                                     a.Id
                                     , ISNULL(a.Codigo, 'Sin Asignar') as Codigo
@@ -31,7 +33,7 @@ namespace Business
                                     , ISNULL(a.Precio, 0) as Precio
                                 FROM ARTICULOS a
                                 LEFT JOIN CATEGORIAS c ON a.IdCategoria = c.Id
-                                LEFT JOIN MARCAS m ON a.IdMarca = m.Id ");
+                                LEFT JOIN MARCAS m ON a.IdMarca = m.Id " + aux);
                 data.ExecuteQuery();
 
                 while (data.Reader.Read())

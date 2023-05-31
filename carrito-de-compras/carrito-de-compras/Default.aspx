@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><%#Eval("Name")%></h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <asp:Button ID="buttonDetails" Text="Ver detalles" cssclass="btn btn-primary" runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click" />
                     </div>
                 </div>
             </div>

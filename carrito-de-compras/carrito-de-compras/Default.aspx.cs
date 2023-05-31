@@ -15,8 +15,18 @@ namespace carrito_de_compras
         protected void Page_Load(object sender, EventArgs e)
         {
             ListItem = ItemBusiness.List();
-            repeaterDefault.DataSource = ListItem;
-            repeaterDefault.DataBind();
+
+            if (!IsPostBack)
+            {
+                repeaterDefault.DataSource = ListItem;
+                repeaterDefault.DataBind();
+            }
+        }
+
+        protected void buttonDetails_Click(object sender, EventArgs e)
+        {
+            string aux = ((Button)sender).CommandArgument;
+            Response.Redirect("Detail.aspx?Id=" + aux);
         }
     }
 }

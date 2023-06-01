@@ -32,6 +32,22 @@ namespace Domain
         [DisplayName("Precio")]
         public Money Price { get; set; }
         public List<Image> Images { get; set; }
+
+        public string GetFirstImage()
+        {
+            string url;
+            if (Images.Count() > 0)
+            {
+                url = Images[0].ToString();
+                return url;
+            }
+            else
+            {
+                url = "Content/NoImagePlaceHolder.svg";
+            }
+            return url;
+
+        }
     }
 }
 

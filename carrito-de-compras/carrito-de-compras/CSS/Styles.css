@@ -1,0 +1,13 @@
+﻿div.item-card {
+    height: 100%;
+}
+div.image-container{
+    height: 60%;
+}
+img.image-card-custom{
+    max-height: 90%;
+    padding: 10% 0px;
+}
+div.card-body-custom{
+    height: 40%;
+}

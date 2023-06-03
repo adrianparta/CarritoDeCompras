@@ -39,15 +39,16 @@
                                     <div class="card-body card-body-custom">
                                         <h5 class="card-title"><%#Eval("Name")%></h5>
                                         <p class="card-text"><%#Eval("Description") %></p>
-                                        <div class="vstack gap-3">
+                                        <div class="vstack justify-content-around">
                                             <asp:Button ID="buttonDetails" Text="Ver detalles" CssClass="btn btn-primary form-control" runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click" />
-                                            <div class="btn-group gap-5" role="group">
-                                                <div class="hstack">
-                                                    <asp:Button ID="btnRemove" Text="-1" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />                                        
-                                                    <asp:Label ID="lblTotalItem" Text=<%#Eval("Amount") %> CssClass="form-control" runat="server" />
-                                                    <asp:Button ID="btnAdd" Text="+1" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />                                        
+                                            <div class="btn-group" role="group">
+                                                <div class="hstack col-2">
+                                                    <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />                                        
+                                                    <asp:Label ID="lblTotalItem" Text=<%#Eval("Amount") %> CssClass="form-control" runat="server"/>
+                                                    <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />              
                                                 </div>
-                                                <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary" runat="server" OnClick="btnAddCart_Click" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+                                                <div class="col-4"></div>
+                                                <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-2" runat="server" OnClick="btnAddCart_Click" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                             </div>
                                         </div>
                                     </div>

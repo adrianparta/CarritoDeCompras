@@ -1,4 +1,8 @@
-﻿div.item-card {
+﻿*{
+    padding: 0px;
+    margin: 0px;
+}
+div.item-card {
     height: 100%;
 }
 div.image-container{

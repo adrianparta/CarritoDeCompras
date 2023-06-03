@@ -42,13 +42,13 @@
                                         <div class="vstack justify-content-around">
                                             <asp:Button ID="buttonDetails" Text="Ver detalles" CssClass="btn btn-primary form-control" runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click" />
                                             <div class="btn-group" role="group">
-                                                <div class="hstack col-2">
+                                                <div class="hstack col-6">
                                                     <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />                                        
                                                     <asp:Label ID="lblTotalItem" Text=<%#Eval("Amount") %> CssClass="form-control" runat="server"/>
                                                     <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />              
                                                 </div>
-                                                <div class="col-4"></div>
-                                                <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-2" runat="server" OnClick="btnAddCart_Click" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+                                                <div class="col-1"></div>
+                                                <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-4" runat="server" OnClick="btnAddCart_Click" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                             </div>
                                         </div>
                                     </div>

@@ -13,6 +13,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
@@ -45,10 +46,14 @@
                             </li>
                         </ul>
                         <a href="ShoppingCart.aspx">
-                            <button type="button" class="btn btn-primary position-relative">
-                                <img src="..\..\Content\ShoppingCart.png" height="35px" width="35px">
-                                <asp:Label ID="spanAmountCart" runat="server" Text="0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" ></asp:Label>
-                            </button>
+                            <asp:UpdatePanel ID="updPanelShoppingCartIcon" UpdateMode="Conditional" runat="server">
+                                <ContentTemplate>
+                                    <button type="button" class="btn btn-primary position-relative">
+                                        <img src="..\..\Content\ShoppingCart.png" height="35px" width="35px">
+                                        <asp:Label ID="spanAmountCart" runat="server" Text="0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" ></asp:Label>
+                                    </button>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </a>
                     </div>
                 </div>

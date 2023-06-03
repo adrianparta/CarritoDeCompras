@@ -108,8 +108,7 @@ namespace carrito_de_compras
                 }
             }
             Session.Contents["ListItem"] = itemList;
-            repeaterDefault.DataSource = itemList;
-            repeaterDefault.DataBind();
+            FilterEvent(sender, e);
         }
 
         protected void btnAddCart_Click(object sender, EventArgs e)
@@ -123,11 +122,21 @@ namespace carrito_de_compras
 
             if (indexItemCart == -1)
             {
-                currentCart.Add(item);
+                if(item.Amount > 0)
+                {
+                    currentCart.Add(item);
+                }
             }
             else
             {
-                currentCart[indexItemCart].Amount = item.Amount;
+                if(item.Amount == 0)
+                {
+                    currentCart.RemoveAt(indexItemCart);
+                }
+                else
+                {
+                    currentCart[indexItemCart].Amount = item.Amount;
+                }
             }
 
             Session.Contents["CartItems"] = currentCart;
@@ -135,7 +144,8 @@ namespace carrito_de_compras
             Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
             spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
 
-            Response.Redirect(Request.Url.AbsoluteUri);
+            UpdatePanel updPanelShoppingCartIcon = (UpdatePanel)Master.FindControl("updPanelShoppingCartIcon");
+            updPanelShoppingCartIcon.Update();
         }
     }
 }

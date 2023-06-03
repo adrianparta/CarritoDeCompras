@@ -50,6 +50,12 @@ namespace Domain
             return url;
 
         }
+        public Money TotalPrice { 
+            get
+            {
+                return Price * Amount;
+            }
+        }
     }
 }
 

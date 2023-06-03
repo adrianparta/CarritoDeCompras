@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Business;
 using Domain;
-using static System.Net.WebRequestMethods;
 
 namespace carrito_de_compras
 {
@@ -20,7 +19,16 @@ namespace carrito_de_compras
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack) {
-                Session.Add("ListItem", ItemBusiness.List());
+                if (Session["CartItems"] is null)
+                {
+                    Session.Add("CartItems", new List<Item>());
+                }
+                if (Session["ListItem"] is null)
+                {
+                    Session.Add("ListItem", ItemBusiness.List());
+                }
+                Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
+                spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
                 ListItem = (List<Item>)Session["ListItem"];
                 repeaterDefault.DataSource = ListItem;
                 repeaterDefault.DataBind();
@@ -73,13 +81,61 @@ namespace carrito_de_compras
                 filteredList = filteredList.Where(x => brandFilter == x.Brand.Id).ToList();
             }
             
-            if (string.IsNullOrEmpty(txtName.Text))
+            if (!string.IsNullOrEmpty(txtName.Text))
             {
                 filteredList = filteredList.Where(x => x.Name.ToLower().Contains(txtName.Text.ToLower())).ToList();
             }
 
             repeaterDefault.DataSource = filteredList;
             repeaterDefault.DataBind();
+        }
+
+        protected void AlterTotalItems(object sender, EventArgs e)
+        {
+            Button btnSender = (Button)sender;
+            List<Item> itemList = (List<Item>)Session["ListItem"];
+            var idItem = int.Parse(btnSender.CommandArgument);
+            var indexItem = itemList.FindIndex(x => x.Id == idItem);
+            if (btnSender.ID == "btnAdd")
+            {
+                itemList[indexItem].Amount++;
+            }
+            else
+            {
+                if(itemList[indexItem].Amount > 0)
+                {
+                    itemList[indexItem].Amount--;
+                }
+            }
+            Session.Contents["ListItem"] = itemList;
+            repeaterDefault.DataSource = itemList;
+            repeaterDefault.DataBind();
+        }
+
+        protected void btnAddCart_Click(object sender, EventArgs e)
+        {
+            Button btnSender = (Button)sender;
+            List<Item> itemList = (List<Item>)Session["ListItem"];
+            var idItem = int.Parse(btnSender.CommandArgument);
+            List<Item> currentCart = (List<Item>)Session["CartItems"];
+            var item = itemList.Single(x => x.Id == idItem);
+            var indexItemCart = currentCart.FindIndex(x => x.Id == idItem);
+
+            if (indexItemCart == -1)
+            {
+                currentCart.Add(item);
+            }
+            else
+            {
+                currentCart[indexItemCart].Amount = item.Amount;
+            }
+
+            Session.Contents["CartItems"] = currentCart;
+
+            Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
+            spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
+
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
 }

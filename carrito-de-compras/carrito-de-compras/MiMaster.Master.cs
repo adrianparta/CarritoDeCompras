@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,10 @@ namespace carrito_de_compras
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!(Session["CartItems"] is null))
+            {
+                spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
+            }
         }
     }
 }

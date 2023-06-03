@@ -55,7 +55,8 @@ namespace Business
                             Description = data.Reader["Categoria"].ToString()
                         },
                         Price = Convert.ToDecimal(data.Reader["Precio"]),
-                        Images = ImageBusiness.List((int)data.Reader["Id"])
+                        Images = ImageBusiness.List((int)data.Reader["Id"]),
+                        Amount = 0
                     };
 
                     itemList.Add(itemAux);

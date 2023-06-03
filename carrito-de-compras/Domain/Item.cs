@@ -32,6 +32,8 @@ namespace Domain
         [DisplayName("Precio")]
         public Money Price { get; set; }
         public List<Image> Images { get; set; }
+        [DisplayName("Cantidad")]
+        public int Amount { get; set; }
 
         public string GetFirstImage()
         {

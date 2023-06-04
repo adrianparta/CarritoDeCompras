@@ -1,7 +1,18 @@
 ﻿*{
     padding: 0px;
     margin: 0px;
+    font-family: sans-serif;
+    text-align: center;
 }
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    margin: 50px 0px;
+}
+
 div.item-card {
     height: 100%;
 }
@@ -14,4 +25,7 @@ img.image-card-custom{
 }
 div.card-body-custom{
     height: 40%;
+}
+div.custom-card{
+    width: 300px;
 }

@@ -39,8 +39,10 @@
                                         <div class="card-body card-body-custom">
                                             <h5 class="card-title"><%#Eval("Name")%></h5>
                                             <p class="card-text"><%#Eval("Description") %></p>
-                                            <div class="vstack justify-content-around">
-                                                <asp:Button ID="buttonDetails" Text="Ver detalles" CssClass="btn btn-primary my-1" runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click" />
+                                            <div class="vstack">
+                                                <div class="row justify-content-center">
+                                                     <asp:Button ID="buttonDetails" Text="Ver detalles" CssClass="btn btn-primary my-1 col-10 " runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click" />
+                                                </div>
                                                 <div class="row p-0 mx-0 my-1 justify-content-around" role="group">
                                                     <div class="hstack col-5 p-0 m-0">
                                                         <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />

@@ -26,7 +26,7 @@
                                         <div class="hstack">
                                             <asp:Button ID="btnRemove" Text="-1" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                             <asp:Label ID="lblTotalItem" Text='<%#Eval("Amount") %>' CssClass="form-control" runat="server" />
-                                            <asp:Button ID="btnAdd" Text="+1" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnAdd" Text="+1" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems"  CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                         </div>
                                     </div>
                                 </div>
@@ -52,11 +52,9 @@
                                     <p><%#Eval("TotalPrice")%></p>
                                 </div>          
                             </div>
-                            <asp:Button Text="" runat="server" Visible="false" CommandArgument='<%#Eval("TotalPrice")%>' CommandName="ButtonTotal" ID="ButtonTotal" OnLoad="ButtonTotal_Load" OnClick="ButtonTotal_Click" />
-                            
                         </ItemTemplate>
                     </asp:Repeater>
-                    <%:Total.ToString()%>
+                    <asp:Label ID="LabelTotal" Text="<%#Total.ToString() %>" runat="server" />
                     <asp:Button Text="Comprar" runat="server" />
                 </div>
             </div>

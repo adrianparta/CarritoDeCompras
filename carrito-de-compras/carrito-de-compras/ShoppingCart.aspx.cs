@@ -24,8 +24,15 @@ namespace carrito_de_compras
                     repeaterCart.DataBind();
                     repeaterPrices.DataSource = currentCart;
                     repeaterPrices.DataBind();
+                    Total = 0;
+                    foreach (var item in currentCart)
+                    {
+                        Total = Total.Price + (Money)item.TotalPrice;
+                    }
+                    LabelTotal.Text = Total.ToString();
                 }
             }
+
 
         }
         protected void AlterTotalItems(object sender, EventArgs e)
@@ -55,18 +62,12 @@ namespace carrito_de_compras
             repeaterPrices.DataSource = currentCart;
             repeaterPrices.DataBind();
 
-        }
-
-
-
-        protected void ButtonTotal_Click(object sender, EventArgs e)
-        {
-            Total += int.Parse(((Button)sender).CommandArgument);
-        }
-
-        protected void ButtonTotal_Load(object sender, EventArgs e)
-        {
-            Total = Total.Price + (Money)(((Button)sender).CommandArgument);
+            Total = 0;
+            foreach (var item in currentCart)
+            {
+                Total = Total.Price + (Money)item.TotalPrice;
+            }
+            LabelTotal.Text = Total.ToString();
         }
     }
 }

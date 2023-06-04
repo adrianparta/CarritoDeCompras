@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-4">
                         <div class="form-floating">
-                            <asp:DropDownList runat="server" ID="ddlBrand" OnSelectedIndexChanged="FilterEvent" CssClass="form-select" AutoPostBack="true"></asp:DropDownList>
+                            <asp:DropDownList runat="server" ID="ddlBrand" OnSelectedIndexChanged="FilterEvent"  CssClass="form-select" AutoPostBack="true"></asp:DropDownList>
                             <label for="ddlBrand" class="form-label">Marca</label>
                         </div>
                     </div>

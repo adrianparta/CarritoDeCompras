@@ -11,6 +11,8 @@ namespace carrito_de_compras
     public partial class ShoppingCart : System.Web.UI.Page
     {
         public string noImageUrl = "this.onerror=null; this.src='Content/NoImagePlaceHolder.svg';";
+
+        public Money Total = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -21,7 +23,7 @@ namespace carrito_de_compras
                     repeaterCart.DataSource = currentCart;
                     repeaterCart.DataBind();
                     repeaterPrices.DataSource = currentCart;
-                    repeaterPrices.DataBind(); 
+                    repeaterPrices.DataBind();
                 }
             }
 
@@ -47,11 +49,24 @@ namespace carrito_de_compras
                     currentCart.RemoveAt(indexItem);
                 }
             }
-            Session.Contents["ListItem"] = currentCart;
+            Session.Contents["CartItems"] = currentCart;
             repeaterCart.DataSource = currentCart;
             repeaterCart.DataBind();
             repeaterPrices.DataSource = currentCart;
             repeaterPrices.DataBind();
+
+        }
+
+
+
+        protected void ButtonTotal_Click(object sender, EventArgs e)
+        {
+            Total += int.Parse(((Button)sender).CommandArgument);
+        }
+
+        protected void ButtonTotal_Load(object sender, EventArgs e)
+        {
+            Total = Total.Price + (Money)(((Button)sender).CommandArgument);
         }
     }
 }

@@ -49,11 +49,14 @@
                                     <p>x <%#Eval("Amount") %></p>
                                 </div>
                                 <div class="col-3">
-                                    <p ><%#Eval("TotalPrice")%></p>
+                                    <p><%#Eval("TotalPrice")%></p>
                                 </div>          
                             </div>
+                            <asp:Button Text="" runat="server" Visible="false" CommandArgument='<%#Eval("TotalPrice")%>' CommandName="ButtonTotal" ID="ButtonTotal" OnLoad="ButtonTotal_Load" OnClick="ButtonTotal_Click" />
+                            
                         </ItemTemplate>
                     </asp:Repeater>
+                    <%:Total.ToString()%>
                     <asp:Button Text="Comprar" runat="server" />
                 </div>
             </div>

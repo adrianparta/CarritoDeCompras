@@ -68,13 +68,15 @@ namespace carrito_de_compras
                 }
                 else
                 {
-                    itemList[indexItem].Amount--;
+                    itemList[indexItem].Amount = 0;
                     lblTotalItem.Text = itemList[indexItem].Amount.ToString();
-                    currentCart.RemoveAt(indexItemCart);
+                    if (currentCart.Contains(item))
+                    {
+                        currentCart.RemoveAt(indexItemCart);
+                    }
                     Session.Contents["CartItems"] = currentCart;
                     Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
                     spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
-
                     UpdatePanel updPanelShoppingCartIcon = (UpdatePanel)Master.FindControl("updPanelShoppingCartIcon");
                     updPanelShoppingCartIcon.Update();
                 }

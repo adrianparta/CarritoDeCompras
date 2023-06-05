@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Business;
 using Domain;
@@ -17,8 +18,9 @@ namespace carrito_de_compras
         public string ImageUrl { get; set; }
         public string noImageUrl = "this.onerror=null; this.src='Content/NoImagePlaceHolder.svg';";
         protected void Page_Load(object sender, EventArgs e)
-        { 
-            if (!IsPostBack) {
+        {
+            if (!IsPostBack)
+            {
                 if (Session["CartItems"] is null)
                 {
                     Session.Add("CartItems", new List<Item>());
@@ -26,6 +28,10 @@ namespace carrito_de_compras
                 if (Session["ListItem"] is null)
                 {
                     Session.Add("ListItem", ItemBusiness.List());
+                }
+                if (Session["statusAmountItems"] is null)
+                {
+                    Session["statusAmountItems"] = true;
                 }
                 Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
                 spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
@@ -58,16 +64,25 @@ namespace carrito_de_compras
             string aux = ((Button)sender).CommandArgument;
             Response.Redirect("Detail.aspx?Id=" + aux);
         }
-
         protected void repeaterDefault_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            ImageUrl = ListItem[e.Item.ItemIndex].GetFirstImage();
+            //ImageUrl = ListItem[e.Item.ItemIndex].GetFirstImage();
+            Label lblAmount = (Label)e.Item.FindControl("lblTotalItem");
+            if (lblAmount.Text == "0")
+            {
+                e.Item.FindControl("itemAmount").Visible = false;
+                e.Item.FindControl("btnAddCart").Visible = true;
+            }
+            else
+            {
+                e.Item.FindControl("itemAmount").Visible = true;
+                e.Item.FindControl("btnAddCart").Visible = false;
+            }
         }
 
         protected void FilterEvent(object sender, EventArgs e)
         {
             List<Item> filteredList = (List<Item>)Session["ListItem"];
-
             var categoryFilter = int.Parse(ddlCategory.SelectedItem.Value);
             var brandFilter = int.Parse(ddlBrand.SelectedItem.Value);
 
@@ -75,17 +90,15 @@ namespace carrito_de_compras
             {
                 filteredList = filteredList.Where(x => categoryFilter == x.Category.Id).ToList();
             }
-            
             if (brandFilter > 0)
             {
                 filteredList = filteredList.Where(x => brandFilter == x.Brand.Id).ToList();
             }
-            
+
             if (!string.IsNullOrEmpty(txtName.Text))
             {
                 filteredList = filteredList.Where(x => x.Name.ToLower().Contains(txtName.Text.ToLower())).ToList();
             }
-
             repeaterDefault.DataSource = filteredList;
             repeaterDefault.DataBind();
         }
@@ -96,33 +109,39 @@ namespace carrito_de_compras
             List<Item> itemList = (List<Item>)Session["ListItem"];
             var idItem = int.Parse(btnSender.CommandArgument);
             var indexItem = itemList.FindIndex(x => x.Id == idItem);
-            if (btnSender.ID == "btnAdd")
+            List<Item> currentCart = (List<Item>)Session["CartItems"];
+            Item item = itemList.Single(x => x.Id == idItem);
+            int indexItemCart = currentCart.FindIndex(x => x.Id == idItem);
+            string btnSenderID = btnSender.ID;
+            if (btnSenderID == "btnAddCart")
+            {
+                currentCart.Add(item);
+                itemList[indexItem].Amount++;
+            }
+            else if (btnSenderID == "btnAdd")
             {
                 itemList[indexItem].Amount++;
             }
-            else
+            else if (btnSender.ID == "btnRemove")
             {
-                if (itemList[indexItem].Amount > 0)
+                itemList[indexItem].Amount--;
+                if (itemList[indexItem].Amount == 0)
                 {
-                    itemList[indexItem].Amount--;
+                    currentCart.RemoveAt(indexItemCart);
                 }
             }
+            Label lblTotalItem = (Label)btnSender.FindControl("lblTotalItem");
+            lblTotalItem.Text = itemList[indexItem].Amount.ToString();
+
             Session.Contents["ListItem"] = itemList;
-            Control itemAmountDiv = btnSender.NamingContainer.FindControl("itemAmount");
-            if (itemAmountDiv != null)
-            {
-                itemAmountDiv.Visible = false; // Set the visibility of the div
-            }
-            //TODO: Implementar estas cosas en los chequeos previos
-            if (btnSender.Text == "-")
-            {
-                Control btnAddCart = btnSender.NamingContainer.FindControl("btnAddCart");
-                if (btnAddCart != null)
-                {
-                    btnAddCart.Visible = true; // Set the visibility of the div
-                }
-            }
-            //FilterEvent(sender, e);
+            Session.Contents["CartItems"] = currentCart;
+
+            Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
+            spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
+
+            UpdatePanel updPanelShoppingCartIcon = (UpdatePanel)Master.FindControl("updPanelShoppingCartIcon");
+            updPanelShoppingCartIcon.Update();
+            FilterEvent(sender, e);
         }
 
         protected void btnAddCart_Click(object sender, EventArgs e)
@@ -136,12 +155,6 @@ namespace carrito_de_compras
 
             currentCart.Add(item);
             Session.Contents["CartItems"] = currentCart;
-            Control itemAmountDiv = btnSender.NamingContainer.FindControl("itemAmount");
-            if (itemAmountDiv != null)
-            {
-                itemAmountDiv.Visible = true; // Set the visibility of the div
-            }
-            btnSender.Visible= false;
             if (indexItemCart == -1)
             {
                 if (item.Amount > 0)
@@ -165,7 +178,7 @@ namespace carrito_de_compras
 
             Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
             spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
-            
+
             UpdatePanel updPanelShoppingCartIcon = (UpdatePanel)Master.FindControl("updPanelShoppingCartIcon");
             updPanelShoppingCartIcon.Update();
         }

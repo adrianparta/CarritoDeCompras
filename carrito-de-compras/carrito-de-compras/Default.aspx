@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                            <asp:Repeater runat="server" ID="repeaterDefault">
+                            <asp:Repeater runat="server" ID="repeaterDefault" OnItemDataBound="repeaterDefault_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="product-box d-inline position-relative custom-card">
                                         <div class="image-container">
@@ -40,21 +40,25 @@
                                             <h5 class="card-title"><%#Eval("Name")%></h5>
                                             <p class="card-text"><%#Eval("Description") %></p>
                                             <div class="vstack">
+
                                                 <div class="row justify-content-center">
                                                      <asp:Button ID="buttonDetails" Text="Ver detalles" CssClass="btn btn-primary my-1 col-10 " runat="server" CommandArgument='<%#Eval("Id") %>' CommandName="Id" OnClick="buttonDetails_Click"/>
                                                 </div>
+
                                                 <div class="row p-0 mx-0 my-1 justify-content-center" role="group">
-                                                    <div class="hstack col-5 p-0 m-0" ID="itemAmount" runat="server">
-                                                        <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
-                                                        <asp:Label ID="lblTotalItem" Text='<%#Eval("Amount") %>' CssClass="form-control" runat="server" />
+
+                                                    <div class="hstack col-5 p-0 m-0" visible="false" ID="itemAmount" runat="server" CommandArgument='<%#Eval("Amount") %>' CommandName="itemAmount">
+                                                        <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id"/>
+                                                        <asp:Label ID="lblTotalItem" Text='<%#Eval("Amount") %>' CssClass="form-control" runat="server"/>
                                                         <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                                     </div>
-                                                    <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-5" runat="server" OnClick="btnAddCart_Click" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+
+                                                    <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-5" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </ItemTemplate>
                             </asp:Repeater>
                         </div>

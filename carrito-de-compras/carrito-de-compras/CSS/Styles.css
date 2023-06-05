@@ -19,9 +19,10 @@ div.item-card {
 div.image-container{
     height: 60%;
 }
-img.image-card-custom{
+img.image-card-custom {
     max-height: 90%;
     padding: 10% 0px;
+    object-fit:cover;
 }
 div.card-body-custom{
     height: 40%;

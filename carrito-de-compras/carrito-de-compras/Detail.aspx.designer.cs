@@ -24,13 +24,13 @@ namespace carrito_de_compras
         protected global::System.Web.UI.WebControls.TextBox TextBoxTitle;
 
         /// <summary>
-        /// Control TextBoxImage.
+        /// Control TextBoxPrice.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxImage;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxPrice;
 
         /// <summary>
         /// Control TextBoxDescription.
@@ -42,12 +42,48 @@ namespace carrito_de_compras
         protected global::System.Web.UI.WebControls.TextBox TextBoxDescription;
 
         /// <summary>
-        /// Control ImageUrl.
+        /// Control TextBoxBrand.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageUrl;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBrand;
+
+        /// <summary>
+        /// Control TextBoxCategory.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxCategory;
+
+        /// <summary>
+        /// Control btnRemove.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRemove;
+
+        /// <summary>
+        /// Control lblTotalItem.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalItem;
+
+        /// <summary>
+        /// Control btnAdd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
     }
 }

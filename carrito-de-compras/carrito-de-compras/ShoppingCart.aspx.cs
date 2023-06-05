@@ -13,6 +13,7 @@ namespace carrito_de_compras
         public string noImageUrl = "this.onerror=null; this.src='Content/NoImagePlaceHolder.svg';";
 
         public Money Total = 0;
+        public bool AnyItem = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -32,8 +33,13 @@ namespace carrito_de_compras
                     LabelTotal.Text = Total.ToString();
                 }
             }
-
-
+            if (!(Session["CartItems"] is null))
+            {
+                if(((List<Item>)Session["CartItems"]).Any())
+                {
+                    AnyItem = true;
+                }
+            }
         }
         protected void AlterTotalItems(object sender, EventArgs e)
         {
@@ -68,6 +74,12 @@ namespace carrito_de_compras
                 Total = Total.Price + (Money)item.TotalPrice;
             }
             LabelTotal.Text = Total.ToString();
+        }
+
+        protected void btnBuy_Click(object sender, EventArgs e)
+        {
+            Session["CartItems"] = null;
+            Response.Redirect("Default.aspx");
         }
     }
 }

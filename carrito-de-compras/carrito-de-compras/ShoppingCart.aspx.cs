@@ -60,6 +60,17 @@ namespace carrito_de_compras
                 if (currentCart[indexItem].Amount == 0)
                 {
                     currentCart.RemoveAt(indexItem);
+
+                    Label spanAmountCart = (Label)Master.FindControl("spanAmountCart");
+                    spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
+
+                    UpdatePanel updPanelShoppingCartIcon = (UpdatePanel)Master.FindControl("updPanelShoppingCartIcon");
+                    updPanelShoppingCartIcon.Update();
+
+                    if (currentCart.Count == 0)
+                    {
+                        AnyItem = false;
+                    }
                 }
             }
             Session.Contents["CartItems"] = currentCart;

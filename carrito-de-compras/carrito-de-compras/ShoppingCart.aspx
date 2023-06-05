@@ -13,10 +13,13 @@
             <asp:Repeater ID="repeaterCart" runat="server">
                 <ItemTemplate>
                     <div class="card mb-4">
+
                         <div class="card-header"><%#Eval("Name") %></div>
                         <div class="row g-0">
-                            <div class="col-md-2">
-                                <img src="<%#((Domain.Item)Container.DataItem).GetFirstImage()%>" onerror="<%#noImageUrl%>" class="img-fluid rounded-start" style="max-height: 200px; max-width: 200px;">
+                            <div class="col-md-2" style="z-index:200">
+                                <a href="Detail.aspx?Id= <%#Eval("Id") %>" style="box-sizing:content-box">
+                                    <img src="<%#((Domain.Item)Container.DataItem).GetFirstImage()%>" onerror="<%#noImageUrl%>" class="img-fluid rounded-start" style="max-height: 200px; max-width: 200px;">
+                                </a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -80,11 +83,13 @@
                 </div>
             </div>
         </div>
-        <%}else { %>
-            <div class="alert alert-warning" role="alert">
-                <h4>Usted no posee ningún Item en su carrito.</h4>
-                <h4>Por favor vuelva a ingresar a esta sección luego de agregar al menos 1 Item.</h4>            
-            </div>
+        <%}
+        else
+        { %>
+        <div class="alert alert-warning" role="alert">
+            <h4>Usted no posee ningún Item en su carrito.</h4>
+            <h4>Por favor vuelva a ingresar a esta sección luego de agregar al menos 1 Item.</h4>
+        </div>
         <% } %>
     </div>
     <div class="modal fade" id="modalBuyDone" tabindex="-1" aria-labelledby="lblModalBuyDone" aria-hidden="true">

@@ -32,9 +32,9 @@
                                 <div style="position: absolute; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; width: 15%;">
                                     <div class="d-flex justify-content-center">
                                         <div class="hstack">
-                                            <asp:Button ID="btnRemove" Text="-1" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                             <asp:Label ID="lblTotalItem" Text='<%#Eval("Amount") %>' CssClass="form-control" runat="server" />
-                                            <asp:Button ID="btnAdd" Text="+1" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
+                                            <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItems" CommandArgument='<%#Eval("Id") %>' CommandName="Id" />
                                         </div>
                                     </div>
                                 </div>

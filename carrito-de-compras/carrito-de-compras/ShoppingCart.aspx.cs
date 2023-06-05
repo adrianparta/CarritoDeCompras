@@ -79,6 +79,7 @@ namespace carrito_de_compras
         protected void btnBuy_Click(object sender, EventArgs e)
         {
             Session["CartItems"] = null;
+            Session["ListItem"] = null;
             Response.Redirect("Default.aspx");
         }
     }

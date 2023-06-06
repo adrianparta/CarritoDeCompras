@@ -6,6 +6,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container text-center">
+        <div>
+            <br />
+            <h4>Detalle de Items</h4>
+            <br />
+        </div>
         <div class="row">
             <div id="carouselExample" class="carousel slide col-7">
                 <div class="carousel-inner">
@@ -14,7 +19,7 @@
                         {
                     %>
                     <div class="carousel-item<%: (item == list[0]) ? " active" : "" %>">
-                        <img src="<%: item.Url %>" class="d-block w-100 rounded border" style="object-fit: cover; height: 400px" alt="...">
+                        <img src="<%: item.Url %>" class="img-fluid rounded border" style="object-fit: cover; height: 400px" alt="...">
                     </div>
                     <%  }
                     %>
@@ -29,21 +34,31 @@
                 </button>
             </div>
 
-            <div class="col-3">
-                <asp:TextBox runat="server" CssClass="fs-1" ID="TextBoxTitle" Style="font-family: 'Anton" />
-                <asp:TextBox runat="server" ID="TextBoxPrice" />
-                <asp:TextBox runat="server" ID="TextBoxDescription" />
-                <asp:TextBox runat="server" ID="TextBoxBrand" />
-                <asp:TextBox runat="server" ID="TextBoxCategory" />
-                <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItem"/>
-                <asp:Label ID="lblTotalItem" CssClass="form-control" runat="server" />
-                <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItem"/>
+            <div class="card col-5">
+                <div class="card-header fs-2" style="font-family: 'Anton'"><%: NameItem%> </div>
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="card-title"><%: CategoryItem%> - <%: BrandItem%></h4>
+                    </div>
+                    <div class="row">
+                        <h4 class="accordion-button"><%: DescriptionItem%></h4>
+                    </div>
+                    <div class="row">
+                        <h4 class="accordion-button"><%: PriceItem%></h4>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row p-0 mx-0 my-1 justify-content-center" role="group">
+                        <div class="hstack col-5 p-0 m-0" visible="false" id="itemAmount" runat="server" >
+                            <asp:Button ID="btnRemove" Text="-" CssClass="btn btn-danger" runat="server" OnClick="AlterTotalItem"  />
+                            <asp:Label ID="lblTotalItem"  CssClass="form-control" runat="server" />
+                            <asp:Button ID="btnAdd" Text="+" CssClass="btn btn-success" runat="server" OnClick="AlterTotalItem" />
+                        </div>
+                        <asp:Button ID="btnAddCart" Text="Añadir" CssClass="btn btn-primary col-5" runat="server" OnClick="AlterTotalItem"/>
+                    </div>
+                </div>
             </div>
-            <div class="col-1"></div>
-
         </div>
     </div>
-
-
 
 </asp:Content>

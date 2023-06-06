@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Business;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace carrito_de_compras
             {
                 spanAmountCart.Text = ((List<Item>)Session["CartItems"]).Count.ToString();
             }
+            if (Session["ListItem"] is null)
+            {
+                Session.Add("ListItem", ItemBusiness.List());
+            }
+            List<Item> listItem = (List<Item>)Session["ListItem"];
+            repeaterDetailsItems.DataSource = listItem;
+            repeaterDetailsItems.DataBind();
         }
     }
 }
